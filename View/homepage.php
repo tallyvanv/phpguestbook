@@ -27,9 +27,6 @@
     <input type=submit value="Send it!">
 </form>
 <div id="playground">
-    <?php echo $_SESSION["name"]; ?>
-    <?php echo $_SESSION["title"]; ?>
-    <?php echo $_SESSION["comment"]; ?>
 </div>
 </body>
 </html>

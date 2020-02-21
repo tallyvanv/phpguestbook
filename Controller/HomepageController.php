@@ -14,14 +14,39 @@ class HomepageController
             $commentInput = $_POST["comment"];
             $dateInput = date('m/d/Y h:i:s a', time());
 
-            $entry = new Guestbook();
-            $entry->createObjectArray($nameInput, $titleInput, $commentInput, $dateInput);
-            var_dump($entry);
-        }
-        if (!isset($_SESSION["name"])){
-            $_SESSION["name"] = $_POST["name"];
-            $_SESSION["title"] = $_POST["title"];
-            $_SESSION["comment"] = $_POST["comment"];
+            $entry = new Post($titleInput, $commentInput, $dateInput, $nameInput);
+            //var_dump($entry);
+            $assoc = $entry->createEntryArray($titleInput, $commentInput, $dateInput, $nameInput);
+            //var_dump($assoc);
+
+
+            $book = new Guestbook();
+
+            if (!isset($_SESSION["guestBook"])){
+                $_SESSION["guestBook"] = $book;
+            }
+            else {
+                $book = $_SESSION["guestBook"];
+            }
+
+            $book->pushToMaster($assoc);
+            $masterArray = $book->getAllPosts();
+            var_dump($masterArray);
+
+            $book->messageLoader($masterArray);
+
+            $revJSON = $book->loaderDecoder();
+            var_dump($revJSON);
+
+
+
+
+/*            $book->messageLoader();
+            $previousEntries = $book->getMessageArray();
+            var_dump($previousEntries);
+
+
+            $book->pushToMaster($previousEntries);*/
         }
 
         function whatIsHappening()

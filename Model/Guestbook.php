@@ -3,15 +3,34 @@
 
 class Guestbook
 {
-    private $objectArray = [];
+    private $masterArray = [];
 
-    public function createObjectArray($authorName, $title, $content, $date)
+    public function getAllPosts()
     {
-        array_push($this->objectArray, new Post($authorName, $title, $content, $date));
+        return $this->masterArray;
     }
 
-/*    public function messageLoader()
+    public function pushToMaster($session)
     {
-        
+        array_push($this->masterArray, $session);
+    }
+
+    public function messageLoader($array)
+    {
+        $data = json_encode($array);
+        file_put_contents("data/messages.json",$data);
+    }
+
+    public function loaderDecoder()
+    {
+        $messageArray = json_decode(file_get_contents("data/messages.json"), true);
+        return $messageArray;
+    }
+
+/*    public function getMessageArray()
+    {
+        $messageArray = [];
+        array_push($messageArray, $this->loaderDecoder());
+        return $messageArray;
     }*/
 }

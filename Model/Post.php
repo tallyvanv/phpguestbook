@@ -6,12 +6,41 @@ class Post
     private $date;
     private $content;
     private $authorName;
+    private $entryArray;
 
-    public function __construct($authorName, $title, $content, $date)
+    public function __construct($title, $content, $date, $authorName)
     {
         $this->title = $title;
-        $this->date = $date;
         $this->content = $content;
+        $this->date = $date;
         $this->authorName = $authorName;
     }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function getName()
+    {
+        return $this->authorName;
+    }
+
+    public function createEntryArray($title, $content, $date, $authorName)
+    {
+        $this->entryArray = ["title" => $this->getTitle(), "content" => $this->getContent(), "date" => $this->getDate(), "name" => $this->getName()];
+        return $this->entryArray;
+    }
+
+
 }
