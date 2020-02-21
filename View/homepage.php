@@ -26,6 +26,13 @@
 
     <input type=submit value="Send it!">
 </form>
+<?php foreach ($dateOrderPosts as $post) :?>
+<p><strong><?php echo $post['title']?></strong></p>
+<p>Message: <?php echo $post['content']?></p>
+<p>Posted on: <?php echo $post['date']?></p>
+<p>By: <?php echo $post['name']?></p>
+<?php endforeach?>
+
 <div id="playground">
 </div>
 </body>

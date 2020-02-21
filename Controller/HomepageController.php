@@ -8,7 +8,6 @@ class HomepageController
 {
     public function render()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nameInput = $_POST["name"];
             $titleInput = $_POST["title"];
             $commentInput = $_POST["comment"];
@@ -35,9 +34,17 @@ class HomepageController
             $book->messageLoader($masterArray);
 
             $revJSON = $book->loaderDecoder();
-        }
 
-        function whatIsHappening()
+            while (count($revJSON) > 20) {
+                array_shift($revJSON);
+            }
+            $dateOrderPosts = array_reverse($revJSON);
+
+        require 'View/homepage.php';
+
+
+
+/*        function whatIsHappening()
           {
               echo '<h2>$_GET</h2>';
               var_dump($_GET);
@@ -48,8 +55,8 @@ class HomepageController
               echo '<h2>$_SESSION</h2>';
               var_dump($_SESSION);
           }
-        whatIsHappening();
+        whatIsHappening();*/
 
-        require 'View/homepage.php';
+
     }
 }
