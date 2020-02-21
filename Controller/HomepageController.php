@@ -31,22 +31,10 @@ class HomepageController
 
             $book->pushToMaster($assoc);
             $masterArray = $book->getAllPosts();
-            var_dump($masterArray);
 
             $book->messageLoader($masterArray);
 
             $revJSON = $book->loaderDecoder();
-            var_dump($revJSON);
-
-
-
-
-/*            $book->messageLoader();
-            $previousEntries = $book->getMessageArray();
-            var_dump($previousEntries);
-
-
-            $book->pushToMaster($previousEntries);*/
         }
 
         function whatIsHappening()
