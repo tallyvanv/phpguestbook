@@ -9,17 +9,27 @@ class HomepageController
 
     public function render()
     {
-        $badWords = array (
-            'ass',
-            'cunt',
-            'twat',
-            'arse',
-            'fuck',
-            'ballsack',
-            'dumb diaper baby',
-            'dick'
-        );
+        /*        $badWords = array (
+                    'ass',
+                    'cunt',
+                    'twat',
+                    'arse',
+                    'fuck',
+                    'ballsack',
+                    'dumb diaper baby',
+                    'dick'
+                );
 
+                $swearCheck = array(fixTags($_POST["name"]),
+                    fixTags($_POST["title"]), fixTags($_POST["comment"]));
+
+                $swearWords = array_intersect($badWords, $swearCheck);*/
+
+        if (!isset($_POST["name"])) {
+            $_POST["name"] = "name";
+            $_POST["title"] = "title";
+            $_POST["comment"] = "comment";
+        }
 
         function fixTags($text)
         {
@@ -32,13 +42,6 @@ class HomepageController
             $text = preg_replace("/=\"\"/", "=", $text);
             return $text;
         }
-
-        $swearCheck = array(fixTags($_POST["name"]),
-            fixTags($_POST["title"]), fixTags($_POST["comment"]));
-
-        $swearWords = array_intersect($badWords, $swearCheck);
-
-        var_dump($swearWords);
 
         $nameInput = fixTags($_POST["name"]);
         $titleInput = fixTags($_POST["title"]);
